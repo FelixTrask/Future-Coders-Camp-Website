@@ -1,15 +1,23 @@
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
+
 
 function App() {
+
+  useEffect(() => {
+    document.title = 'Future Coders Camp';
+
+    // const link = document.querySelector("link[rel*='icon']");
+    // link.href = (`${process.env.PUBLIC_URL}/favicon.ico`); //public folder
+  }, []);
+
   return (
-    <div class="text-center bg-gray">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div class="bg-bg-light text-white h-screen flex flex-col px-4 py-8 font-sans relative">
+      <header class="bg-blue-900/70 backdrop-blur-lg p-8 rounded-xl max-w-3xl mx-auto shadow-glow text-center">
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
         <a
-          className="App-link"
+          class="App-link"
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
@@ -17,6 +25,7 @@ function App() {
           Learn React
         </a>
       </header>
+
     </div>
   );
 }
