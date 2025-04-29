@@ -1,7 +1,15 @@
-import React, { useEffect } from 'react';
-
+import React, { useState, useEffect } from 'react';
 
 function App() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     document.title = 'Future Coders Camp';
@@ -11,20 +19,26 @@ function App() {
   }, []);
 
   return (
-    <div class="bg-bg-light text-white h-screen flex flex-col px-4 py-8 font-sans relative">
-      <header class="bg-blue-900/70 backdrop-blur-lg p-8 rounded-xl max-w-3xl mx-auto shadow-glow text-center">
+    
+    <div className="min-h-screen flex flex-col bg-gray-100">
+
+      <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? "bg-white shadow-lg py-2" : "bg-transparent py-4"}`}>
+        wsg
+      </header>
+
+      <p className="bg-blue-900/70 backdrop-blur-lg p-8 rounded-xl max-w-3xl mx-auto shadow-glow text-center">
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
         <a
-          class="App-link"
+          className="App-link"
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
         >
           Learn React
         </a>
-      </header>
+      </p>
 
     </div>
   );
