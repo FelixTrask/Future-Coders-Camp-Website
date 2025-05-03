@@ -1,7 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* App.css */
 .future-background {
     position: relative;
     z-index: 0;
-    --scroll-y: 0px;
   }
   
   .future-background::before {
@@ -20,10 +24,7 @@
       conic-gradient(from 60deg at calc(200%/3) 50%, #aaaaaacc 60deg, #555555cc 0 120deg, #0000 0),
       conic-gradient(from -60deg at 50% calc(100%/3), #aaaaaacc 120deg, #777777cc 0 240deg, #555555cc 0);
     background-size: 69px 40px;
-    background-position: 0 var(--scroll-y);
     opacity: 0.1;
     will-change: background-position;
     z-index: -1;
-    pointer-events: none;
   }
-  

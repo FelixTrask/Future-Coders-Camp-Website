@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import { db } from './firebase';
+import { collection, addDoc } from 'firebase/firestore';
 
 function App() {
   const [email, setEmail] = useState('');
@@ -7,12 +9,10 @@ function App() {
   const [showPopup, setShowPopup] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Set the title of the document
   useEffect(() => {
     document.title = 'Future Coders Camp';
   }, []);
 
-  // Handle scroll event
   useEffect(() => {
     const handleScroll = () => {
       const offsetY = window.scrollY;
@@ -28,15 +28,6 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Call your backend API to test connection when app starts
-  useEffect(() => {
-    fetch('http://localhost:4000/api/test')
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.error('Fetch error:', err));
-  }, []); // Empty dependency array to run this once when the component mounts
-
-  // Handle form submission for email signup
   const handleSignUp = async () => {
     setError('');
     if (!email) {
@@ -45,19 +36,13 @@ function App() {
     }
 
     try {
-      const res = await fetch('http://localhost:4000/api/emails', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Failed to save email');
-
+      await addDoc(collection(db, 'emails'), { email, timestamp: new Date() });
       setShowPopup(true);
       setEmail('');
       setTimeout(() => setShowPopup(false), 5000);
     } catch (err) {
-      setError(err.message);
+      console.error('Error saving to Firebase:', err);
+      setError('Failed to save email. Please try again.');
     }
   };
 
@@ -66,31 +51,19 @@ function App() {
 
       {/* Header */}
       <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-lg py-2' : 'bg-transparent py-4'}`}>
-        <div className="pt-1.5"></div>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           <div className="text-xl font-bold text-gray-800">Future Coders Camp</div>
-          <nav className="flex space-x-6 text-sm md:text-base items-center">
-            <a href="#top" className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <nav className="space-x-6 text-sm md:text-base flex items-center">
+            <a href="#top" className="flex items-center space-x-1 text-gray-600 hover:text-blue-600 transition">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
               </svg>
               <span>Home</span>
             </a>
-            <a href="#learn-more" className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-              </svg>
-              <span>Program</span>
-            </a>
-            <a href="#signup" className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
-              </svg>
-              <span>Register</span>
-            </a>
+            <a href="#learn-more" className="text-gray-600 hover:text-blue-600 transition">Program</a>
+            <a href="#signup" className="text-gray-600 hover:text-blue-600 transition">Register</a>
           </nav>
         </div>
-        <div className="pt-1.5"></div>
       </header>
 
       {/* Hero Section */}
@@ -132,15 +105,15 @@ function App() {
             Future Coders Camp introduces kids to the world of programming through creative play, game design, and hands-on fun projects using Scratch.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 bg-pink-100 rounded-2xl shadow-md border-2 border-pink-200 transition-shadow duration-300 hover:shadow-xl">
+            <div className="p-6 bg-pink-100 rounded-2xl shadow-md border-2 border-pink-200 hover:shadow-xl transition">
               <h3 className="text-xl font-bold text-pink-700 mb-2">Build a Game</h3>
               <p className="text-gray-700">Kids will design and code their very own video game using Scratch.</p>
             </div>
-            <div className="p-6 bg-blue-100 rounded-2xl shadow-md border-2 border-blue-200 transition-shadow duration-300 hover:shadow-xl">
+            <div className="p-6 bg-blue-100 rounded-2xl shadow-md border-2 border-blue-200 hover:shadow-xl transition">
               <h3 className="text-xl font-bold text-blue-700 mb-2">Who Can Join?</h3>
               <p className="text-gray-700">Any child aged 7-10 is welcome! No experience needed.</p>
             </div>
-            <div className="p-6 bg-yellow-100 rounded-2xl shadow-md border-2 border-yellow-200 transition-shadow duration-300 hover:shadow-xl">
+            <div className="p-6 bg-yellow-100 rounded-2xl shadow-md border-2 border-yellow-200 hover:shadow-xl transition">
               <h3 className="text-xl font-bold text-yellow-700 mb-2">Camp Fee</h3>
               <p className="text-gray-700">$60 per session, including all materials.</p>
             </div>
@@ -148,7 +121,7 @@ function App() {
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* Signup Section */}
       <section id="signup" className="min-h-[50vh] flex flex-col items-center justify-center text-center px-8">
         <h2 className="text-3xl font-bold mb-6">Join Our Mailing List</h2>
         <p className="max-w-xl text-gray-600 mb-8">

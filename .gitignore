@@ -22,13 +22,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Ignore the .env file
-.env
-old.env
-
-# Ignore node_modules
-node_modules/
-
 # Ignore any other sensitive or unnecessary files
 *.log
 
+firebase.js
