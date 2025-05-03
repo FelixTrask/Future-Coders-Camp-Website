@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Future-Coders-Camp-Website/static/css/main.bb36f9d6.css",
+    "main.js": "/Future-Coders-Camp-Website/static/js/main.d3c6a49c.js",
+    "static/js/453.80478446.chunk.js": "/Future-Coders-Camp-Website/static/js/453.80478446.chunk.js",
+    "index.html": "/Future-Coders-Camp-Website/index.html",
+    "main.bb36f9d6.css.map": "/Future-Coders-Camp-Website/static/css/main.bb36f9d6.css.map",
+    "main.d3c6a49c.js.map": "/Future-Coders-Camp-Website/static/js/main.d3c6a49c.js.map",
+    "453.80478446.chunk.js.map": "/Future-Coders-Camp-Website/static/js/453.80478446.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bb36f9d6.css",
+    "static/js/main.d3c6a49c.js"
+  ]
+}
