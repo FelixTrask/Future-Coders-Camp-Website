@@ -2,84 +2,92 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
+  const [showPopup, setShowPopup] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const offsetY = window.scrollY;
-
       setIsScrolled(offsetY > 10);
-  
+
       const background = document.querySelector('.future-background');
       if (background) {
         background.style.backgroundPosition = `0 ${offsetY * 0.1}px`;
       }
     };
-  
+
     window.addEventListener('scroll', handleScroll);
-  
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
 
   useEffect(() => {
     document.title = 'Future Coders Camp';
-
-    // const link = document.querySelector("link[rel*='icon']");
-    // link.href = (`${process.env.PUBLIC_URL}/favicon.ico`); //public folder
   }, []);
 
   return (
-    
     <div className="min-h-screen flex flex-col future-background">
 
-    <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? "bg-white shadow-lg py-2" : "bg-transparent py-4"}`}>
-      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <div className="text-xl font-bold text-gray-800">Future Coders Camp</div>
-        <nav className="space-x-6 text-sm md:text-base">
-          <a href="#top" className="text-gray-600 hover:text-blue-600 transition">Home</a>
-          <a href="#learn-more" className="text-gray-600 hover:text-blue-600 transition">Learn More</a>
-          <a href="#signup" className="text-gray-600 hover:text-blue-600 transition">Sign Up</a>
-        </nav>
-      </div>
-    </header>
-
-
-      {/* Spacer under header */}
-      {/* <div className="pt-24"></div> */}
+      <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? "bg-white shadow-lg py-2" : "bg-transparent py-4"}`}>
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          <div className="text-xl font-bold text-gray-800">Future Coders Camp</div>
+          <nav className="space-x-6 text-sm md:text-base">
+            <a href="#top" className="text-gray-600 hover:text-blue-600 transition">Home</a>
+            <a href="#learn-more" className="text-gray-600 hover:text-blue-600 transition">Program</a>
+            <a href="#signup" className="text-gray-600 hover:text-blue-600 transition">Register</a>
+          </nav>
+        </div>
+      </header>
 
       {/* Hero Section */}
       <section id="top" className="flex flex-col items-center justify-center min-h-screen text-center px-8">
-        <h1 className="text-4xl md:text-6xl font-bold mb-6">Future Coders Camp</h1>
+        <h1 className="text-4xl md:text-6xl font-bold mb-6 text-blue-600">Future Coders Camp</h1>
         <p className="max-w-2xl text-lg text-gray-600 mb-8">
-          Join us on a journey to master modern coding techniques, design beautiful websites, and create powerful apps.
+          A fun and engaging coding experience for kids aged 7-10 using Scratch.
         </p>
-        <a href="#learn-more" className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition">
-          Get Started
-        </a>
+            <a
+              href="#learn-more"
+              class="relative bg-[#4b48ff] text-white font-medium text-[17px] px-4 py-[0.35em] pl-5 h-[2.8em] rounded-[0.9em] flex items-center overflow-hidden cursor-pointer shadow-[inset_0_0_1.6em_-0.6em_#714da6] group"
+            >
+              <span class="mr-10">Learn More</span>
+              <div
+                class="absolute right-[0.3em] bg-white h-[2.2em] w-[2.2em] rounded-[0.7em] flex items-center justify-center transition-all duration-300 group-hover:w-[calc(100%-0.6em)] shadow-[0.1em_0.1em_0.6em_0.2em_#7b52b9] active:scale-95"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  class="w-[1.1em] transition-transform duration-300 text-[#7b52b9] group-hover:translate-x-[0.1em]"
+                >
+                  <path fill="none" d="M0 0h24v24H0z"></path>
+                  <path
+                    fill="currentColor"
+                    d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                  ></path>
+                </svg>
+              </div>
+            </a>
       </section>
 
       {/* About Section */}
-      <section id="learn-more" className="min-h-screen bg-white/70 backdrop-blur-md py-20 px-8">
+      <section id="learn-more" className="min-h-screen bg-white py-20 px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">About Future Coders Camp</h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-blue-600 mb-6">About the Camp</h2>
           <p className="text-lg text-gray-700 mb-10">
-            We are passionate about teaching the next generation of coders. Our curriculum covers full-stack web development, UI/UX design, and cutting-edge frameworks.
+          Future Coders Camp introduces kids to the world of programming through creative play, game design, and hands-on fun projects using Scratch.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 bg-white rounded-xl shadow-md">
-              <h3 className="text-xl font-bold mb-4">Frontend</h3>
-              <p className="text-gray-600">Learn React, Tailwind CSS, animations, and more to build beautiful interfaces.</p>
+            <div className="p-6 bg-pink-100 rounded-2xl shadow-md border-2 border-pink-200">
+              <h3 className="text-xl font-bold text-pink-700 mb-2">Build a Game</h3>
+              <p className="text-gray-700">Kids will design and code their very own video game using Scratch.</p>
             </div>
-            <div className="p-6 bg-white rounded-xl shadow-md">
-              <h3 className="text-xl font-bold mb-4">Backend</h3>
-              <p className="text-gray-600">Master Node.js, databases, APIs, authentication, and server-side skills.</p>
+            <div className="p-6 bg-blue-100 rounded-2xl shadow-md border-2 border-blue-200">
+              <h3 className="text-xl font-bold text-blue-700 mb-2">Who Can Join?</h3>
+              <p className="text-gray-700">Any child aged 7-10 is welcome! No experience needed.</p>
             </div>
-            <div className="p-6 bg-white rounded-xl shadow-md">
-              <h3 className="text-xl font-bold mb-4">Career Skills</h3>
-              <p className="text-gray-600">Portfolio building, GitHub best practices, and landing your dream job in tech.</p>
+            <div className="p-6 bg-yellow-100 rounded-2xl shadow-md border-2 border-yellow-200">
+              <h3 className="text-xl font-bold text-yellow-700 mb-2">Camp Fee</h3>
+              <p className="text-gray-700">$60 per session, including all materials.</p>
             </div>
           </div>
         </div>
@@ -87,18 +95,54 @@ function App() {
 
       {/* Contact Section */}
       <section id="signup" className="min-h-[50vh] flex flex-col items-center justify-center text-center px-8">
-        <h2 className="text-3xl font-bold mb-6">Stay Connected</h2>
+        <h2 className="text-3xl font-bold mb-6">Join Our Mailing List</h2>
         <p className="max-w-xl text-gray-600 mb-8">
-          Subscribe to our newsletter and stay up-to-date with workshops, webinars, and coding tips.
+          Stay in the loop with camp schedules, early registration, and coding resources for kids.
         </p>
         <input
           type="email"
-          placeholder="Enter your email"
+          placeholder="Your email address"
           className="border border-gray-300 p-3 rounded-lg mb-4 w-full max-w-sm"
         />
-        <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition">
-          Subscribe
+        <button
+          onClick={() => {
+            setShowPopup(true);
+            setTimeout(() => {
+              setShowPopup(false);
+            }, 5000);
+          }}
+          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition"
+        >
+          Sign Up
         </button>
+
+
+        {showPopup && (
+          <div
+            onClick={() => {
+              setShowPopup(false);
+            }}
+            role="alert"
+            className="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-green-100 border-l-4 border-green-500 text-green-900 p-3 rounded-lg flex items-center shadow-lg z-50 transition duration-300 ease-in-out hover:bg-green-200 hover:scale-105"
+          >
+            <svg
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              fill="none"
+              className="h-5 w-5 flex-shrink-0 mr-2 text-green-600"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M13 16h-1v-4h1m0-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                strokeWidth="2"
+                strokeLinejoin="round"
+                strokeLinecap="round"
+              ></path>
+            </svg>
+            <p className="text-sm font-semibold">Success - You're all signed up!</p>
+          </div>
+        )}
+
       </section>
 
       {/* Footer */}
