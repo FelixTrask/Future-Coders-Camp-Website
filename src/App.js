@@ -66,14 +66,31 @@ function App() {
 
       {/* Header */}
       <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-lg py-2' : 'bg-transparent py-4'}`}>
+        <div className="pt-1.5"></div>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           <div className="text-xl font-bold text-gray-800">Future Coders Camp</div>
-          <nav className="space-x-6 text-sm md:text-base">
-            <a href="#top" className="text-gray-600 hover:text-blue-600 transition">Home</a>
-            <a href="#learn-more" className="text-gray-600 hover:text-blue-600 transition">Program</a>
-            <a href="#signup" className="text-gray-600 hover:text-blue-600 transition">Register</a>
+          <nav className="flex space-x-6 text-sm md:text-base items-center">
+            <a href="#top" className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+              </svg>
+              <span>Home</span>
+            </a>
+            <a href="#learn-more" className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+              </svg>
+              <span>Program</span>
+            </a>
+            <a href="#signup" className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
+              </svg>
+              <span>Register</span>
+            </a>
           </nav>
         </div>
+        <div className="pt-1.5"></div>
       </header>
 
       {/* Hero Section */}
