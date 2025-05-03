@@ -140,7 +140,7 @@ function App() {
       <section id="signup" className="min-h-[50vh] flex flex-col items-center justify-center text-center px-8">
         <h2 className="text-3xl font-bold mb-6">Join Our Mailing List</h2>
         <p className="max-w-xl text-gray-600 mb-8">
-          Stay in the loop with camp schedules, early registration, and coding resources for kids.
+          Stay in the loop with camp schedules, early registration for an early bird discount, and important camp information.
         </p>
 
         <input
